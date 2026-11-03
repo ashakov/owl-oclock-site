@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Owl O'Clock: Learn to Tell Time, Step by Step</title>
+<meta name="description" content="Help your child read a real clock in seven short steps, from o'clock to every minute. Every mistake gets a clear tip. Three levels free, no ads, no account. iPhone, iPad and Android.">
+<meta name="apple-itunes-app" content="app-id=6829764919">
+<meta name="theme-color" content="#2338C9">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Owl O'Clock: learn to tell time, step by step">
+<meta property="og:description" content="Seven short steps from o'clock to every minute. Every mistake gets a clear tip. Three levels free, no ads, no account.">
+<meta property="og:image" content="https://ashakov.github.io/owl-oclock-site/img/og.jpg">
+<meta property="og:url" content="https://ashakov.github.io/owl-oclock-site/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="preload" href="fonts/baloo-2-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  @font-face { font-family: "Baloo 2"; font-weight: 700; font-display: swap; src: url(fonts/baloo-2-latin-700-normal.woff2) format("woff2"); }
+  @font-face { font-family: "Baloo 2"; font-weight: 800; font-display: swap; src: url(fonts/baloo-2-latin-800-normal.woff2) format("woff2"); }
+  @font-face { font-family: Nunito; font-weight: 400; font-display: swap; src: url(fonts/nunito-latin-400-normal.woff2) format("woff2"); }
+  @font-face { font-family: Nunito; font-weight: 700; font-display: swap; src: url(fonts/nunito-latin-700-normal.woff2) format("woff2"); }
+  @font-face { font-family: Nunito; font-weight: 800; font-display: swap; src: url(fonts/nunito-latin-800-normal.woff2) format("woff2"); }
+
+  :root {
+    --hour: #3B5BFD; --hour-deep: #2338C9; --minute: #FF8A1F; --minute-text: #B45000; --minute-hand: #D96400;
+    --rim: #FFC531; --ink: #1B2559; --ink-soft: #4F5B86; --bg: #F2F6FF; --card: #FFFFFF; --line: #DCE3F7;
+    --good: #12A150; --good-bg: #E6F7EE; --bad-bg: #FFF0EE; --bad: #C2361F;
+    --radius: 24px; --shadow: 0 6px 0 rgba(27, 37, 89, .08), 0 16px 40px rgba(27, 37, 89, .08);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 18px/1.6 Nunito, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+  img { max-width: 100%; display: block; }
+  a { color: var(--hour-deep); }
+  h1, h2, h3 { font-family: "Baloo 2", Nunito, system-ui, sans-serif; line-height: 1.12; margin: 0; letter-spacing: -.01em; }
+  h1 { font-size: clamp(38px, 6vw, 64px); font-weight: 800; }
+  h2 { font-size: clamp(30px, 4.4vw, 46px); font-weight: 800; }
+  h3 { font-size: 23px; font-weight: 700; }
+  p { margin: 0; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 88px 0; }
+  .eyebrow { font-weight: 800; font-size: 14px; letter-spacing: .08em; text-transform: uppercase; color: var(--minute-text); margin-bottom: 12px; }
+  .lead { font-size: 20px; color: var(--ink-soft); max-width: 640px; }
+  .center { text-align: center; } .center .lead { margin-left: auto; margin-right: auto; }
+  .skip { position: absolute; left: -999px; } .skip:focus { left: 12px; top: 12px; z-index: 99; background: #fff; padding: 8px 12px; border-radius: 8px; }
+
+  /* Buttons */
+  .stores { display: flex; flex-wrap: wrap; gap: 12px; }
+  .store { display: inline-flex; align-items: center; gap: 12px; min-height: 60px; padding: 10px 22px 10px 18px; border-radius: 18px; background: var(--ink); color: #fff; text-decoration: none; box-shadow: 0 5px 0 #0d1433; transition: transform .12s, box-shadow .12s; }
+  .store:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #0d1433; }
+  .store:active { transform: translateY(3px); box-shadow: 0 2px 0 #0d1433; }
+  .store:focus-visible, .btn:focus-visible, button:focus-visible { outline: 4px solid var(--rim); outline-offset: 3px; }
+  .store svg { width: 26px; height: 26px; flex: none; }
+  .store small { display: block; font-size: 12px; font-weight: 700; opacity: .8; line-height: 1.1; }
+  .store b { display: block; font-family: "Baloo 2", sans-serif; font-size: 21px; font-weight: 700; line-height: 1.1; }
+  .store.primary { background: #fff; color: var(--ink); box-shadow: 0 5px 0 #c5cff2; }
+  .hero .store.primary { box-shadow: 0 5px 0 #15238a; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; padding: 0 28px; border: 0; border-radius: 18px; font: 800 18px Nunito, sans-serif; cursor: pointer; text-decoration: none; background: var(--hour); color: #fff; box-shadow: 0 5px 0 var(--hour-deep); transition: transform .12s, box-shadow .12s; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--hour-deep); }
+  .btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--hour-deep); }
+  .btn.ghost { background: #fff; color: var(--ink); box-shadow: 0 5px 0 var(--line); }
+  .ticks { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 22px; padding: 0; list-style: none; font-weight: 700; font-size: 16px; }
+  .ticks li { display: flex; align-items: center; gap: 8px; }
+  .ticks li::before { content: ""; width: 20px; height: 20px; flex: none; border-radius: 50%; background: var(--rim) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%231B2559' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat; }
+
+  /* Header */
+  header.top { position: absolute; inset: 0 0 auto; z-index: 5; }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font: 800 24px "Baloo 2", sans-serif; }
+  .brand img { width: 40px; height: 40px; border-radius: 11px; box-shadow: 0 0 0 2px rgba(255,255,255,.35); }
+  .top nav { display: flex; align-items: center; gap: 22px; }
+  .top nav a { color: #fff; text-decoration: none; font-weight: 700; font-size: 16px; opacity: .9; }
+  .top nav a:hover { opacity: 1; text-decoration: underline; }
+  .top nav .cta { background: #fff; color: var(--ink); padding: 9px 18px; border-radius: 14px; opacity: 1; box-shadow: 0 4px 0 #15238a; }
+  @media (max-width: 760px) { .top nav a:not(.cta) { display: none; } }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; color: #fff; background: radial-gradient(1100px 600px at 75% 30%, #3B5BFD 0%, var(--hour-deep) 55%, #1a2aa6 100%); padding: 128px 0 0; }
+  .hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 70px; background: var(--bg); clip-path: ellipse(70% 100% at 50% 100%); }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: end; }
+  .hero-copy { padding-bottom: 120px; }
+  .hero .eyebrow { color: #fff; opacity: .92; }
+  .hero h1 { margin-bottom: 20px; }
+  .hero h1 em { font-style: normal; color: var(--rim); }
+  .hero .lead { color: #fff; margin-bottom: 30px; }
+  .hero .ticks { color: #fff; }
+  .hero-art { position: relative; height: 600px; }
+  .hero-art .phone { position: absolute; right: 10px; bottom: -40px; width: 300px; }
+  .hero-art .owl { position: absolute; left: -10px; bottom: 30px; width: 210px; z-index: 2; filter: drop-shadow(0 20px 30px rgba(0,0,30,.35)); }
+  .bubble { position: absolute; left: 0; bottom: 250px; z-index: 3; max-width: 230px; background: #fff; color: var(--ink); padding: 14px 18px; border-radius: 20px 20px 20px 6px; font-weight: 800; font-size: 17px; line-height: 1.35; box-shadow: 0 12px 30px rgba(0,0,40,.25); animation: pop .5s 1s both cubic-bezier(.2,1.4,.4,1); }
+  @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.9); } }
+  @media (max-width: 900px) {
+    .hero { padding-top: 104px; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 24px; }
+    .hero-copy { padding-bottom: 0; }
+    .hero-art { height: 400px; max-width: 440px; width: 100%; margin: 0 auto; }
+    .hero-art .phone { right: 0; bottom: -30px; width: 210px; border-radius: 36px; padding: 8px; }
+    .hero-art .phone img { border-radius: 29px; }
+    .hero-art .owl { left: 0; bottom: 36px; width: 150px; }
+    .bubble { left: 0; bottom: 200px; max-width: 180px; font-size: 15px; padding: 12px 14px; }
+  }
+  @media (max-width: 480px) {
+    .stores { flex-wrap: nowrap; }
+    .store { flex: 1 1 0; min-width: 0; justify-content: center; padding: 8px 10px; gap: 8px; min-height: 56px; }
+    .store b { font-size: 17px; } .store small { font-size: 11px; }
+    .store svg { width: 22px; height: 22px; }
+  }
+
+  /* Phone frame */
+  .phone { border-radius: 44px; padding: 10px; background: var(--ink); box-shadow: 0 30px 60px rgba(0,0,40,.35), inset 0 0 0 2px #2d3a7a; }
+  .phone img { border-radius: 35px; width: 100%; height: auto; aspect-ratio: 600 / 1304; object-fit: cover; background: #f5f7ff; }
+
+  /* Pain */
+  .pains { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 44px; }
+  .pain { background: var(--card); border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); display: grid; grid-template-columns: 56px 1fr; gap: 18px; align-items: start; }
+  .pain .ico { width: 56px; height: 56px; border-radius: 18px; display: grid; place-items: center; background: var(--bad-bg); }
+  .pain .ico svg { width: 30px; height: 30px; }
+  .pain h3 { margin-bottom: 6px; }
+  .pain p { color: var(--ink-soft); }
+  .turn { margin: 48px auto 0; max-width: 760px; text-align: center; font: 800 clamp(24px, 3vw, 32px)/1.3 "Baloo 2", sans-serif; }
+  .turn mark { background: linear-gradient(transparent 60%, #ffe08a 60%); color: inherit; padding: 0 4px; }
+  @media (max-width: 760px) { .pains { grid-template-columns: 1fr; } .pain { padding: 22px; grid-template-columns: 48px 1fr; } .pain .ico { width: 48px; height: 48px; } }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 52px; counter-reset: s; }
+  .step { text-align: center; }
+  .step .phone { width: min(260px, 100%); margin: 0 auto 26px; transform: rotate(var(--r, 0deg)); transition: transform .3s; }
+  .step:hover .phone { transform: rotate(0) translateY(-6px); }
+  .step h3 { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
+  .step h3::before { counter-increment: s; content: counter(s); width: 34px; height: 34px; border-radius: 50%; background: var(--rim); color: var(--ink); display: grid; place-items: center; font-size: 19px; }
+  .step p { color: var(--ink-soft); max-width: 320px; margin: 0 auto; }
+  @media (max-width: 860px) { .steps { grid-template-columns: 1fr; gap: 56px; } }
+
+  /* Demo */
+  .demo { background: var(--card); border-radius: 36px; box-shadow: var(--shadow); padding: 48px; display: grid; grid-template-columns: 1fr 1fr; grid-template-areas: "clock head" "clock actions"; column-gap: 48px; align-items: center; }
+  .demo-head { grid-area: head; align-self: end; }
+  .demo-actions { grid-area: actions; align-self: start; }
+  .demo-clock { grid-area: clock; display: grid; justify-items: center; gap: 18px; }
+  .demo-clock svg.clock { width: min(340px, 100%); height: auto; touch-action: none; }
+  .ctrls { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .ctrl { display: flex; align-items: center; gap: 6px; background: var(--bg); border-radius: 18px; padding: 6px; }
+  .ctrl span { font-weight: 800; font-size: 15px; min-width: 64px; text-align: center; }
+  .ctrl button { width: 44px; height: 44px; border: 0; border-radius: 14px; background: #fff; color: var(--ink); font: 800 24px/1 Nunito, sans-serif; cursor: pointer; box-shadow: 0 3px 0 var(--line); }
+  .ctrl .h button { color: var(--hour); } .ctrl .m button { color: var(--minute-text); }
+  .ctrl button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--line); }
+  .task { display: flex; align-items: center; gap: 14px; margin: 18px 0 22px; padding: 14px 18px; background: var(--bg); border-radius: 20px; }
+  .task .owl { width: 64px; flex: none; }
+  .task b { font: 800 26px "Baloo 2", sans-serif; display: block; line-height: 1.1; }
+  .feedback { min-height: 84px; border-radius: 18px; padding: 14px 18px; font-weight: 800; margin-top: 16px; background: var(--bg); color: var(--ink-soft); transition: background .2s; }
+  .feedback.good { background: var(--good-bg); color: #0b6b36; }
+  .feedback.bad { background: var(--bad-bg); color: var(--bad); }
+  .demo .row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+  .after { display: none; margin-top: 22px; padding-top: 22px; border-top: 2px dashed var(--line); }
+  .after.show { display: block; animation: pop .4s both; }
+  .after p { font-weight: 700; margin-bottom: 14px; }
+  @media (max-width: 860px) { .demo { grid-template-columns: 1fr; grid-template-areas: "head" "clock" "actions"; padding: 28px 20px; row-gap: 22px; } .demo-actions .row .btn { flex: 1; } }
+
+  /* Levels */
+  .path { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; margin-top: 48px; position: relative; }
+  .path::before { content: ""; position: absolute; top: 38px; left: 7%; right: 7%; height: 6px; border-radius: 3px; background: repeating-linear-gradient(90deg, var(--rim) 0 14px, transparent 14px 24px); }
+  .lvl { position: relative; text-align: center; }
+  .lvl .dot { width: 82px; height: 82px; margin: 0 auto 12px; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 5px 0 var(--line); position: relative; }
+  .lvl .dot svg { width: 58px; height: 58px; }
+  .lvl.free .dot { box-shadow: 0 5px 0 #f0b400, 0 0 0 4px var(--rim); }
+  .lvl h3 { font-size: 18px; margin-bottom: 4px; }
+  .lvl p { font-size: 14px; color: var(--ink-soft); line-height: 1.35; }
+  .tag { display: inline-block; margin-top: 8px; font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 99px; background: var(--rim); color: var(--ink); }
+  .tag.paid { background: #E8ECFF; color: var(--hour-deep); }
+  .std { display: block; margin-top: 4px; font-size: 12px; color: var(--ink-soft); }
+  @media (max-width: 980px) {
+    .path { grid-template-columns: 1fr; gap: 10px; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .path::before { top: 20px; bottom: 20px; left: 40px; right: auto; width: 6px; height: auto; background: repeating-linear-gradient(180deg, var(--rim) 0 14px, transparent 14px 24px); }
+    .lvl { display: grid; grid-template-columns: 82px 1fr; gap: 16px; align-items: center; text-align: left; }
+    .lvl .dot { margin: 0; }
+    .lvl .tag { margin-top: 4px; }
+  }
+
+  /* Parents */
+  .split { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: center; }
+  .split .phone { width: min(320px, 100%); margin: 0 auto; }
+  .list { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 18px; }
+  .list li { display: grid; grid-template-columns: 44px 1fr; gap: 14px; }
+  .list .n { width: 44px; height: 44px; border-radius: 14px; background: #E8ECFF; display: grid; place-items: center; }
+  .list .n svg { width: 24px; height: 24px; }
+  .list b { display: block; font-size: 19px; }
+  .list span { color: var(--ink-soft); }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: 40px; } .split .phone { order: 2; } }
+
+  /* Pricing */
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .plan { background: var(--card); border-radius: 32px; padding: 34px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  .plan.full { background: var(--ink); color: #fff; position: relative; }
+  .plan.full .badge { position: absolute; top: -14px; right: 28px; background: var(--rim); color: var(--ink); font-weight: 800; font-size: 14px; padding: 6px 14px; border-radius: 99px; }
+  .plan h3 { font-size: 26px; }
+  .price { font: 800 54px/1 "Baloo 2", sans-serif; margin: 14px 0 4px; }
+  .price small { font: 700 17px Nunito, sans-serif; opacity: .75; }
+  .plan .note { font-size: 15px; opacity: .75; margin-bottom: 20px; }
+  .plan ul { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 10px; flex: 1; }
+  .plan li { display: grid; grid-template-columns: 24px 1fr; gap: 10px; }
+  .plan li::before { content: ""; width: 22px; height: 22px; margin-top: 3px; border-radius: 50%; background: var(--good-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%2312A150' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat; }
+  .plan.full li::before { background-color: rgba(255,197,49,.2); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 10.5l3 3 6-7' fill='none' stroke='%23FFC531' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+  .plan .btn { width: 100%; }
+  .plan.full .btn { background: var(--rim); color: var(--ink); box-shadow: 0 5px 0 #c99400; }
+  .fineprint { text-align: center; color: var(--ink-soft); font-size: 15px; margin-top: 22px; }
+  @media (max-width: 760px) { .plans { grid-template-columns: 1fr; } .plan { padding: 26px; } }
+
+  /* Safety */
+  .safe { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 40px; }
+  .safe div { background: var(--card); border-radius: 22px; padding: 22px 16px; text-align: center; box-shadow: var(--shadow); font-weight: 800; }
+  .safe svg { width: 36px; height: 36px; margin: 0 auto 10px; display: block; }
+  .safe span { display: block; font-weight: 400; font-size: 14px; color: var(--ink-soft); margin-top: 4px; line-height: 1.4; }
+  @media (max-width: 900px) { .safe { grid-template-columns: repeat(2, 1fr); } .safe div:last-child { grid-column: 1 / -1; } }
+
+  /* FAQ */
+  .faq { max-width: 800px; margin: 44px auto 0; display: grid; gap: 12px; }
+  details { background: var(--card); border-radius: 20px; box-shadow: 0 3px 0 var(--line); }
+  summary { cursor: pointer; list-style: none; padding: 20px 56px 20px 24px; font-weight: 800; font-size: 19px; position: relative; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; position: absolute; right: 22px; top: 50%; transform: translateY(-50%); width: 30px; height: 30px; border-radius: 50%; background: var(--bg); display: grid; place-items: center; font-size: 22px; color: var(--hour); transition: transform .2s; }
+  details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  details p { padding: 0 24px 22px; color: var(--ink-soft); }
+
+  /* Final */
+  .final { background: radial-gradient(900px 500px at 50% 0%, #3B5BFD, var(--hour-deep) 70%); color: #fff; border-radius: 40px; padding: 64px 32px; text-align: center; position: relative; overflow: hidden; }
+  .final .owl { width: 130px; margin: 0 auto 18px; }
+  .final .lead { color: #fff; margin: 16px auto 30px; }
+  .final .stores { justify-content: center; }
+  .final .ticks { justify-content: center; }
+
+  footer { padding: 56px 0 120px; color: var(--ink-soft); font-size: 16px; }
+  footer .cols { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 32px; }
+  footer h3 { font-size: 18px; color: var(--ink); margin-bottom: 10px; }
+  footer p + p { margin-top: 8px; }
+  @media (max-width: 760px) { footer .cols { grid-template-columns: 1fr; } }
+
+  /* Mobile sticky CTA */
+  .sticky { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 20; display: none; align-items: center; gap: 12px; padding: 10px 10px 10px 14px; background: var(--ink); color: #fff; border-radius: 22px; box-shadow: 0 14px 40px rgba(0,0,40,.35); transform: translateY(140%); transition: transform .3s; }
+  .sticky.show { transform: none; }
+  .sticky img { width: 42px; height: 42px; border-radius: 11px; }
+  .sticky div { flex: 1; line-height: 1.2; font-size: 14px; } .sticky b { display: block; font-size: 16px; }
+  .sticky a { background: var(--rim); color: var(--ink); text-decoration: none; font-weight: 800; padding: 12px 16px; border-radius: 14px; white-space: nowrap; }
+  @media (max-width: 760px) { .sticky { display: flex; } }
+
+  /* Owl animations */
+  .owl-svg { overflow: visible; }
+  .owl-bob { animation: bob 3s ease-in-out infinite; transform-origin: 60px 100px; }
+  .owl-blink { animation: blink 4s infinite; transform-origin: 60px 47px; }
+  .owl-spin { animation: spin 12s linear infinite; transform-origin: 60px 82px; }
+  .owl-cheer .owl-bob { animation: hop .6s ease-out 2; }
+  @keyframes bob { 50% { transform: translateY(-3px); } }
+  @keyframes hop { 50% { transform: translateY(-10px); } }
+  @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .clock .hand { transition: transform .35s cubic-bezier(.3,1.4,.5,1); }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="img/icon-180.png" alt="" width="40" height="40">Owl O'Clock</a>
+    <nav aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="#try">Try it</a>
+      <a href="#price">Price</a>
+      <a href="#faq">FAQ</a>
+      <a class="cta" href="#get" data-store-link>Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- 1. Hero: the moment, the promise, the first step -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">For kids about 5 to 8 · iPhone, iPad and Android</p>
+      <h1>The clock worksheet came home. <em>Let's make it click.</em></h1>
+      <p class="lead">Owl O'Clock teaches your child to read a real clock in seven short steps, from o'clock to every minute. Every mistake gets a clear tip, so your child knows why, not just "wrong".</p>
+      <div class="stores" id="get" data-stores></div>
+      <ul class="ticks">
+        <li>3 levels free, no time limit</li>
+        <li>No ads</li>
+        <li>No account</li>
+        <li>Works offline</li>
+      </ul>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="phone"><img src="img/home.webp" alt="" width="600" height="1304" fetchpriority="high"></div>
+      <p class="bubble">Hoo! I'm Tick. Let's read my tummy clock.</p>
+      <div class="owl" data-owl></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Pain -->
+<section class="section" id="why">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow">Sound familiar?</p>
+      <h2>Telling time is harder than it looks</h2>
+      <p class="lead" style="margin-top:14px">Two hands, two jobs, and the short one moves too. Most kids get stuck in the same few places, and most practice doesn't help them get unstuck.</p>
+    </div>
+    <div class="pains">
+      <div class="pain">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#C2361F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l-3 2"/><path d="M12 12l4-2"/></svg></div>
+        <div><h3>"Which one is the hour hand again?"</h3><p>Mixing up the hands is the classic mistake. A worksheet marks it wrong, but it can't explain the mix-up at the moment your child makes it.</p></div>
+      </div>
+      <div class="pain">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#C2361F" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></div>
+        <div><h3>Quiz apps just say "wrong"</h3><p>A buzzer doesn't teach. Your child taps again, and learns to guess instead of read the clock.</p></div>
+      </div>
+      <div class="pain">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#C2361F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg></div>
+        <div><h3>Locked right after o'clock</h3><p>Many clock apps open one level, then ask for a weekly subscription, or fill the screen with ads.</p></div>
+      </div>
+      <div class="pain">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="#C2361F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 110-18 9 9 0 010 18z"/><path d="M12 7v5h4"/></svg></div>
+        <div><h3>No time to plan lessons tonight</h3><p>You want the next right step, in the order school teaches it, without building a plan yourself.</p></div>
+      </div>
+    </div>
+    <p class="turn">Owl O'Clock is built around one idea: <mark>every mistake gets a reason and a tip</mark>, one small step at a time.</p>
+  </div>
+</section>
+
+<!-- 3. Solution: how it works -->
+<section class="section" id="how" style="padding-top:0">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow">How it works</p>
+      <h2>Watch. Try. Get a tip.</h2>
+      <p class="lead" style="margin-top:14px">Each of the seven levels follows the same calm loop. Ten minutes a day is plenty.</p>
+    </div>
+    <div class="steps">
+      <div class="step" style="--r:-3deg">
+        <div class="phone"><img src="img/lesson.webp" alt="A cartoon lesson: the long hand sweeps to the 6 for half past" width="600" height="1304" loading="lazy"></div>
+        <h3>Watch</h3>
+        <p>A short cartoon lesson shows one idea, like "the long hand points down for half past". It's read aloud by your device's voice.</p>
+      </div>
+      <div class="step" style="--r:2deg">
+        <div class="phone"><img src="img/practice.webp" alt="Practice: set the clock to 11:45 by moving the hands" width="600" height="1304" loading="lazy"></div>
+        <h3>Try</h3>
+        <p>Your child sets the hands or picks the right time. Every round has 8 new questions, so answers can't simply be memorised.</p>
+      </div>
+      <div class="step" style="--r:-2deg">
+        <div class="phone"><img src="img/tip.webp" alt="A tip after a wrong answer: the short hand tells the hour, the long hand tells the minutes" width="600" height="1304" loading="lazy"></div>
+        <h3>Get a tip</h3>
+        <p>When an answer is wrong, Tick explains the mix-up and gives a tip. After two tries, the answer is shown, so nobody gets stuck.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Interactive proof -->
+<section class="section" id="try" style="padding-top:0">
+  <div class="wrap">
+    <div class="demo">
+      <div class="demo-clock">
+        <svg class="clock" viewBox="0 0 240 240" role="img" aria-labelledby="clockLabel">
+          <title id="clockLabel">Practice clock</title>
+          <circle cx="120" cy="120" r="112" fill="#FFC531"/>
+          <circle cx="120" cy="120" r="112" fill="none" stroke="#E5A800" stroke-width="3"/>
+          <circle cx="120" cy="120" r="98" fill="#FFF8EC"/>
+          <g id="marks"></g>
+          <g class="hand" id="hourHand"><line x1="120" y1="128" x2="120" y2="70" stroke="#3B5BFD" stroke-width="10" stroke-linecap="round"/></g>
+          <g class="hand" id="minHand"><line x1="120" y1="132" x2="120" y2="36" stroke="#D96400" stroke-width="6" stroke-linecap="round"/><circle cx="120" cy="36" r="5" fill="#D96400"/></g>
+          <circle cx="120" cy="120" r="9" fill="#1B2559"/>
+        </svg>
+        <div class="ctrls">
+          <div class="ctrl h"><button type="button" data-step="h" data-d="-1" aria-label="Hour back">−</button><span>Hour</span><button type="button" data-step="h" data-d="1" aria-label="Hour forward">+</button></div>
+          <div class="ctrl m"><button type="button" data-step="m" data-d="-5" aria-label="Minutes back 5">−</button><span>Minutes</span><button type="button" data-step="m" data-d="5" aria-label="Minutes forward 5">+</button></div>
+        </div>
+      </div>
+      <div class="demo-head">
+        <p class="eyebrow">Try it now, no download</p>
+        <h2>Can you set the clock?</h2>
+        <div class="task"><div class="owl" data-owl id="demoOwl"></div><div>Set the clock to <b id="target">half past 3</b></div></div>
+        <p style="color:var(--ink-soft)">Blue buttons move the short hour hand, orange ones the long minute hand. Then check. Try a wrong answer on purpose and see what Tick says.</p>
+      </div>
+      <div class="demo-actions">
+        <div class="row">
+          <button class="btn" type="button" id="check">Check</button>
+          <button class="btn ghost" type="button" id="next">New time</button>
+        </div>
+        <div class="feedback" id="feedback" role="status" aria-live="polite">Tick is waiting for your answer…</div>
+        <div class="after" id="after">
+          <p>Tick asks questions like this in every level, with a tip for every mistake. There are seven levels, and the first three are free.</p>
+          <div class="stores" data-stores></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. The path -->
+<section class="section" id="levels" style="padding-top:0">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow">Seven steps, grade 1 to grade 3</p>
+      <h2>In the order school teaches it</h2>
+      <p class="lead" style="margin-top:14px">From the first o'clock to working out how long things take. Each level follows the US Common Core standard for telling time.</p>
+    </div>
+    <div class="path" data-levels></div>
+  </div>
+</section>
+
+<!-- 6. Parents -->
+<section class="section" style="padding-top:0">
+  <div class="wrap split">
+    <div class="phone"><img src="img/report.webp" alt="The parent report: minutes practised, clocks read, right first time, progress for each level" width="600" height="1304" loading="lazy"></div>
+    <div>
+      <p class="eyebrow">For grown-ups</p>
+      <h2>See what they've mastered in ten seconds</h2>
+      <p class="lead" style="margin-top:14px">The parent area sits behind a parental gate. It shows exactly where your child is, and what to practise together.</p>
+      <ul class="list">
+        <li><span class="n"><svg viewBox="0 0 24 24" fill="none" stroke="#2338C9" stroke-width="2.2" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><div><b>Progress for every level</b><span>Stars, how many answers were right first time, and minutes practised this week.</span></div></li>
+        <li><span class="n"><svg viewBox="0 0 24 24" fill="none" stroke="#2338C9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></span><div><b>Their most common mistakes</b><span>For example "hands swapped", with a tip you can use with a real clock at home.</span></div></li>
+        <li><span class="n"><svg viewBox="0 0 24 24" fill="none" stroke="#2338C9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 14.2A5 5 0 0122 19"/></svg></span><div><b>Up to 4 children</b><span>With the full course, each child gets their own profile and progress.</span></div></li>
+        <li><span class="n"><svg viewBox="0 0 24 24" fill="none" stroke="#2338C9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>A daily review of 5 questions</b><span>Keeps earlier levels fresh while your child moves on.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Offer -->
+<section class="section" id="price" style="padding-top:0">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow">Simple, fair price</p>
+      <h2>Start free. Pay once if you want the rest.</h2>
+    </div>
+    <div class="plans">
+      <div class="plan">
+        <h3>Free</h3>
+        <div class="price">$0</div>
+        <p class="note">No time limit, no trial countdown</p>
+        <ul>
+          <li>Level 1: O'Clock</li>
+          <li>Level 2: Half Past</li>
+          <li>Level 3: Quarters</li>
+          <li>Clock Lab: free play with a clock your child can turn</li>
+          <li>Daily review and the parent report</li>
+          <li>1 child profile</li>
+        </ul>
+        <a class="btn ghost" href="#get" data-store-link>Start free</a>
+      </div>
+      <div class="plan full">
+        <span class="badge">One payment</span>
+        <h3>Full course</h3>
+        <div class="price">$4.99 <small>once</small></div>
+        <p class="note">US price. Your store shows your local price.</p>
+        <ul>
+          <li>Everything in Free</li>
+          <li>Level 4: Count by Fives</li>
+          <li>Level 5: Every Minute</li>
+          <li>Level 6: Morning or Night? (a.m. and p.m.)</li>
+          <li>Level 7: How Long? (elapsed time)</li>
+          <li>A printable Clock Master certificate</li>
+          <li>Up to 4 children, each with their own progress</li>
+        </ul>
+        <a class="btn" href="#get" data-store-link>Get the app</a>
+      </div>
+    </div>
+    <p class="fineprint">Not a subscription. You buy the full course inside the app, in the parent area. Reinstalling or a new device? Tap Restore. No account needed.</p>
+  </div>
+</section>
+
+<!-- 8. Trust -->
+<section class="section" id="safe" style="padding-top:0">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow">Made for kids</p>
+      <h2>Safe to hand over</h2>
+    </div>
+    <div class="safe">
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="#3B5BFD" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 4l16 16"/></svg>No ads<span>Nothing to tap by accident</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="#3B5BFD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0116 0"/></svg>No account<span>No sign-up, no email</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="#3B5BFD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>No data collected<span>Progress stays on the device</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="#3B5BFD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.5a15 15 0 0120 0M5.5 12a10 10 0 0113 0M9 15.5a5 5 0 016 0"/><circle cx="12" cy="19" r="1"/><path d="M3 3l18 18"/></svg>Works offline<span>In the car, on a plane</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="#3B5BFD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Parental gate<span>Your child never sees a price</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Objections -->
+<section class="section" id="faq" style="padding-top:0">
+  <div class="wrap">
+    <div class="center">
+      <p class="eyebrow">Questions parents ask</p>
+      <h2>Before you download</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Is it really free, or a trial?</summary><p>Levels 1 to 3 (o'clock, half past and quarters), the Clock Lab, the daily review and the parent report are free, with no time limit. You only pay if you want levels 4 to 7.</p></details>
+      <details><summary>What age is it for?</summary><p>Children of about 5 to 8 who are learning to tell time at school or at home, roughly grades 1 to 3. It also suits homeschoolers and teachers who want a step-by-step unit.</p></details>
+      <details><summary>Does one purchase cover all my children?</summary><p>Yes. The full course gives up to 4 child profiles on the device, each with their own progress. On another phone or tablet signed in to the same Apple ID or Google account, tap Restore in the parent area.</p></details>
+      <details><summary>Is it a subscription?</summary><p>No. It's one payment of $4.99 in the US (your store shows your local price). Nothing renews and nothing is charged later.</p></details>
+      <details><summary>Will my child see ads or prices?</summary><p>No ads at all. The price only appears in the parent area, behind a parental gate.</p></details>
+      <details><summary>Does it need the internet?</summary><p>No. Lessons and practice work offline. You only need a connection to buy or restore the full course.</p></details>
+      <details><summary>How is this different from a worksheet?</summary><p>A worksheet is great for practice, and you can keep using it. The app adds what paper can't: the hands move, every round has new questions, and each wrong answer gets an explanation right away.</p></details>
+      <details><summary>What data do you collect?</summary><p>None. There's no account, no analytics and no advertising ID. Progress is stored on the device. See the <a href="privacy.html">privacy policy</a>.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Final CTA -->
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="final">
+      <div class="owl" data-owl aria-hidden="true"></div>
+      <h2>Start with o'clock tonight</h2>
+      <p class="lead">Install it, hand it over, and let Tick take the first lesson. The first three levels are free, so you'll know if it works for your child before you pay anything.</p>
+      <div class="stores" data-stores></div>
+      <ul class="ticks"><li>No ads</li><li>No account</li><li>One payment, not a subscription</li></ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="support">
+  <div class="wrap cols">
+    <div>
+      <h3>Owl O'Clock: Tell Time</h3>
+      <p>Learn the clock, step by step. For iPhone, iPad and Android.</p>
+      <p>© 2026 Aslan Shakov</p>
+    </div>
+    <div>
+      <h3>Support</h3>
+      <p>Email <a href="mailto:aslansakov@yandex.ru?subject=Owl%20O'Clock">aslansakov@yandex.ru</a>. We answer within two working days.</p>
+      <p><a href="support.html">Restoring a purchase</a></p>
+    </div>
+    <div>
+      <h3>Legal</h3>
+      <p><a href="privacy.html">Privacy policy</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <img src="img/icon-180.png" alt="">
+  <div><b>Owl O'Clock</b>3 levels free · no ads</div>
+  <a href="#get" data-store-link tabindex="-1">Get it free</a>
+</div>
+
+<script>
+(() => {
+  const APP_STORE = 'https://apps.apple.com/app/id6829764919';
+  const PLAY = 'https://play.google.com/store/apps/details?id=com.ashakov.telltime&referrer=utm_source%3Dsite%26utm_medium%3Dlanding';
+  const ua = navigator.userAgent;
+  const ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const android = /Android/.test(ua);
+
+  // Store buttons: the visitor's own store first and highlighted.
+  const apple = `<a class="store" href="${APP_STORE}" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.5 2-3.6-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.8-3.5.8s-1.8-.8-3-.8C7 7.3 5.6 8.2 4.8 9.6c-1.7 2.9-.4 7.2 1.2 9.6.8 1.2 1.7 2.4 3 2.4 1.2 0 1.6-.8 3.1-.8s1.9.8 3.1.8c1.3 0 2.1-1.2 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7 0 0-2.5-1-2.5-4zM14.2 5.6c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.7 1.4-.6.7-1.1 1.8-1 2.9 1 .1 2.1-.5 2.7-1.3z"/></svg><span><small>Download on the</small><b>App Store</b></span></a>`;
+  const google = `<a class="store" href="${PLAY}" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 2.8v18.4c0 .3.3.5.6.3l10.3-9.2a.4.4 0 000-.6L4.6 2.5c-.3-.2-.6 0-.6.3z" fill="#3B5BFD"/><path d="M14.9 11.7L4.6 2.5 17.5 9.6z" fill="#12A150"/><path d="M14.9 12.3L4.6 21.5l12.9-7.1z" fill="#FF8A1F"/><path d="M17.5 9.6l-2.6 2.1 2.6 2.7 3-1.7c.7-.4.7-1.4 0-1.8z" fill="#FFC531"/></svg><span><small>Get it on</small><b>Google Play</b></span></a>`;
+  const order = android ? [google, apple] : [apple, google];
+  document.querySelectorAll('[data-stores]').forEach(el => {
+    el.innerHTML = order.join('');
+    if (ios || android) el.firstElementChild.classList.add('primary');
+    else if (el.closest('.hero, .final')) el.querySelectorAll('.store').forEach(a => a.classList.add('primary'));
+  });
+  // On a phone, "Get the app" goes straight to the right store.
+  if (ios || android) document.querySelectorAll('[data-store-link]').forEach(a => a.href = ios ? APP_STORE : PLAY);
+
+  // Tick, the same owl as in the app.
+  const owl = `<svg class="owl-svg" viewBox="0 0 120 120" aria-hidden="true"><g class="owl-bob">
+    <ellipse cx="60" cy="114" rx="30" ry="5" fill="#1b2559" opacity=".12"/>
+    <path d="M22 62C8 70 8 92 24 98c2-12 4-24 6-34z" fill="#e08a12"/><path d="M98 62c14 8 14 30-2 36-2-12-4-24-6-34z" fill="#e08a12"/>
+    <path d="M60 18c28 0 40 24 40 52 0 26-16 40-40 40S20 96 20 70c0-28 12-52 40-52z" fill="#ffa928"/>
+    <path d="M60 22c24 0 36 22 36 48 0 4-.4 8-1 11-7-21-19-31-35-31S32 60 25 81c-.6-3-1-7-1-11 0-26 12-48 36-48z" fill="#ffbc4a" opacity=".7"/>
+    <path d="M30 30l-4-20 18 14zM90 30l4-20-18 14z" fill="#e08a12"/>
+    <circle cx="60" cy="82" r="21" fill="#fff8ec" stroke="#e08a12" stroke-width="2.5"/>
+    ${Array.from({ length: 12 }, (_, i) => { const a = i * Math.PI / 6; return `<circle cx="${(60 + 16.5 * Math.sin(a)).toFixed(2)}" cy="${(82 - 16.5 * Math.cos(a)).toFixed(2)}" r="${i % 3 ? 1.1 : 1.8}" fill="#c9a36b"/>`; }).join('')}
+    <line x1="60" y1="82" x2="60" y2="71" stroke="#3B5BFD" stroke-width="3.5" stroke-linecap="round"/>
+    <line class="owl-spin" x1="60" y1="82" x2="60" y2="66" stroke="#D96400" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="60" cy="82" r="2.6" fill="#1b2559"/>
+    <circle cx="44" cy="46" r="17" fill="#fff"/><circle cx="76" cy="46" r="17" fill="#fff"/>
+    <g class="owl-blink"><circle cx="45" cy="47" r="8.5" fill="#1b2559"/><circle cx="77" cy="47" r="8.5" fill="#1b2559"/><circle cx="48" cy="44" r="3" fill="#fff"/><circle cx="80" cy="44" r="3" fill="#fff"/></g>
+    <ellipse cx="31" cy="60" rx="5" ry="3" fill="#ff7a6b" opacity=".45"/><ellipse cx="89" cy="60" rx="5" ry="3" fill="#ff7a6b" opacity=".45"/>
+    <path d="M53 57h14l-7 10z" fill="#ff6b3d"/>
+    <path d="M48 108l-4 6M52 108v7M56 108l4 6M64 108l-4 6M68 108v7M72 108l4 6" stroke="#ff6b3d" stroke-width="3" stroke-linecap="round"/>
+  </g></svg>`;
+  document.querySelectorAll('[data-owl]').forEach(el => el.innerHTML = owl);
+
+  // Mini clock face for the level path.
+  const mini = (h, m, locked) => `<svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="27" fill="${locked ? '#E8ECFF' : '#FFC531'}"/><circle cx="30" cy="30" r="22" fill="#FFF8EC"/>
+    <line x1="30" y1="30" x2="${30 + 11 * Math.sin((h % 12 + m / 60) * Math.PI / 6)}" y2="${30 - 11 * Math.cos((h % 12 + m / 60) * Math.PI / 6)}" stroke="#3B5BFD" stroke-width="4" stroke-linecap="round"/>
+    <line x1="30" y1="30" x2="${30 + 17 * Math.sin(m * Math.PI / 30)}" y2="${30 - 17 * Math.cos(m * Math.PI / 30)}" stroke="#D96400" stroke-width="2.6" stroke-linecap="round"/><circle cx="30" cy="30" r="2.8" fill="#1B2559"/></svg>`;
+  const levels = [
+    ["O'Clock", 'Whole hours, like 3 o\'clock', '1.MD.B.3', 3, 0, true],
+    ['Half Past', 'Half past, like 2:30', '1.MD.B.3', 2, 30, true],
+    ['Quarters', 'Quarter past and quarter to', '2.MD.C.7', 9, 15, true],
+    ['Count by Fives', 'To the nearest 5 minutes', '2.MD.C.7', 4, 25, false],
+    ['Every Minute', 'To the exact minute', '3.MD.A.1', 7, 38, false],
+    ['Morning or Night?', 'a.m. and p.m. in daily life', '2.MD.C.7', 8, 0, false],
+    ['How Long?', 'How much time has passed', '3.MD.A.1', 5, 50, false],
+  ];
+  document.querySelector('[data-levels]').innerHTML = levels.map(([t, d, s, h, m, free], i) =>
+    `<div class="lvl${free ? ' free' : ''}"><div class="dot">${mini(h, m, !free)}</div><div><h3>${i + 1}. ${t}</h3><p>${d}</p><span class="tag${free ? '' : ' paid'}">${free ? 'Free' : 'Full course'}</span><span class="std">${s}</span></div></div>`).join('');
+
+  // Practice clock.
+  const marks = document.getElementById('marks');
+  let svg = '';
+  for (let i = 0; i < 60; i++) {
+    const a = i * Math.PI / 30, big = i % 5 === 0;
+    const r1 = big ? 86 : 90, r2 = 95;
+    svg += `<line x1="${120 + r1 * Math.sin(a)}" y1="${120 - r1 * Math.cos(a)}" x2="${120 + r2 * Math.sin(a)}" y2="${120 - r2 * Math.cos(a)}" stroke="${big ? '#1B2559' : '#C9A36B'}" stroke-width="${big ? 3 : 1.5}" stroke-linecap="round"/>`;
+  }
+  for (let n = 1; n <= 12; n++) {
+    const a = n * Math.PI / 6;
+    svg += `<text x="${120 + 66 * Math.sin(a)}" y="${120 - 66 * Math.cos(a) + 8}" text-anchor="middle" font-family="Baloo 2, Nunito, sans-serif" font-weight="800" font-size="23" fill="#2338C9">${n}</text>`;
+  }
+  marks.innerHTML = svg;
+
+  const tasks = [
+    { h: 3, m: 30, say: 'half past 3', long: 'points straight down to the 6 for half past', short: 'halfway between the 3 and the 4' },
+    { h: 7, m: 0, say: "7 o'clock", long: "points straight up to the 12 for o'clock", short: 'right on the 7' },
+    { h: 9, m: 15, say: 'quarter past 9', long: 'points to the 3 for quarter past, a quarter of the way round', short: 'just past the 9' },
+    { h: 4, m: 45, say: 'quarter to 5', long: 'points to the 9 for quarter to', short: 'almost at the 5, but not quite' },
+  ];
+  let ti = 0, h = 12, m = 0, tries = 0;
+  // Angles accumulate so the hands always turn the short way round.
+  let hourDeg = 0, minDeg = 0;
+  const hourHand = document.getElementById('hourHand'), minHand = document.getElementById('minHand');
+  const fb = document.getElementById('feedback'), after = document.getElementById('after'), demoOwl = document.getElementById('demoOwl');
+  function draw() {
+    const targetMin = m * 6, targetHour = ((h % 12) + m / 60) * 30;
+    minDeg += ((targetMin - minDeg) % 360 + 540) % 360 - 180;
+    hourDeg += ((targetHour - hourDeg) % 360 + 540) % 360 - 180;
+    minHand.style.transform = `rotate(${minDeg}deg)`;
+    hourHand.style.transform = `rotate(${hourDeg}deg)`;
+    minHand.style.transformOrigin = hourHand.style.transformOrigin = '120px 120px';
+  }
+  function say(text, tone) { fb.textContent = text; fb.className = 'feedback' + (tone ? ' ' + tone : ''); }
+  function setTask(i) {
+    ti = i; tries = 0; h = 10; m = 0; draw();
+    document.getElementById('target').textContent = tasks[ti].say;
+    say('Tick is waiting for your answer…');
+  }
+  document.querySelectorAll('[data-step]').forEach(b => b.addEventListener('click', () => {
+    const d = +b.dataset.d;
+    if (b.dataset.step === 'h') h = ((h - 1 + d + 12) % 12) + 1;
+    else {
+      m += d;
+      if (m >= 60) { m -= 60; h = (h % 12) + 1; }
+      if (m < 0) { m += 60; h = ((h - 2 + 12) % 12) + 1; }
+    }
+    draw();
+  }));
+  document.getElementById('check').addEventListener('click', () => {
+    const t = tasks[ti];
+    if (h === t.h && m === t.m) {
+      say(`Hoo! That's ${t.say}. ${t.m === 0 ? 'The long hand is on the 12.' : `The long hand is on the ${t.m / 5}.`} Well done!`, 'good');
+      demoOwl.classList.remove('owl-cheer'); void demoOwl.offsetWidth; demoOwl.classList.add('owl-cheer');
+      after.classList.add('show');
+      return;
+    }
+    tries++;
+    const handsSwapped = (h % 12) === ((t.m / 5) % 12) && m === (t.h % 12) * 5 && t.m !== (t.h % 12) * 5;
+    let tip;
+    if (handsSwapped) tip = 'Hands swapped! The short hand shows the hour. The long hand shows the minutes.';
+    else if (m === t.m) tip = `The long hand is right! Now the short hand: it should be ${t.short}.`;
+    else if (h === t.h) tip = `The short hand is right! Now the long hand: it ${t.long}.`;
+    else tip = 'Not quite. Start with the long minute hand, then move the short hour hand.';
+    if (tries >= 2 && !handsSwapped) tip = `Here's how: the long hand ${t.long}, and the short hand is ${t.short}.`;
+    say(tip, 'bad');
+  });
+  document.getElementById('next').addEventListener('click', () => setTask((ti + 1) % tasks.length));
+  setTask(0);
+
+  // Sticky CTA on phones after the hero, hidden again near the final call.
+  const sticky = document.getElementById('sticky');
+  const hero = document.querySelector('.hero'), final = document.querySelector('.final');
+  const seen = new Set();
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => e.isIntersecting ? seen.add(e.target) : seen.delete(e.target));
+    sticky.classList.toggle('show', !seen.size);
+  });
+  io.observe(hero); io.observe(final);
+})();
+</script>
+</body>
+</html>
